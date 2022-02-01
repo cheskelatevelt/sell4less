@@ -34,7 +34,7 @@ const data = {
       price: 180.0,
       countInStock: 2,
       brand: "Tommy Hilfiger",
-      rating: 2,
+      rating: 3.5,
       numReviews: 7,
       description: "Multi-Color Coat",
     },
