@@ -103,6 +103,14 @@ button.primary{
   background-color: #f0c040;
 }
 
+button.disabled{
+  background-color: #a9a9a9;
+}
+
+button.disabled:hover{
+  cursor: not-allowed;
+}
+
 button.block{
   width: 100%;
 }

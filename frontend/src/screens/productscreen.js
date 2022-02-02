@@ -70,7 +70,7 @@ export default function ProductScreen(props) {
                         {product.countInStock > 0 ? (
                           <span className="success">In Stock</span>
                         ) : (
-                          <span className="danger">Unavailable</span>
+                          <span className="danger">Currently Unavailable</span>
                         )}
                       </div>
                     </div>
@@ -109,7 +109,7 @@ export default function ProductScreen(props) {
 
                   {product.countInStock <= 0 && (
                     <li>
-                      <button disabled className="primary block">
+                      <button disabled className="disabled block">
                         Add To Cart
                       </button>
                     </li>
