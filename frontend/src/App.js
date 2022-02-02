@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import HomeScreen from "./screens/homescreen";
 import ProductScreen from "./screens/productscreen";
 import CartScreen from "./screens/CartScreen";
+import SigninScreen from "./screens/SigninScreen";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <main>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen}></Route>
+          <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
 
