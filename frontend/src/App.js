@@ -4,7 +4,8 @@ import HomeScreen from "./screens/homescreen";
 import ProductScreen from "./screens/productscreen";
 import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "./actions/userActions";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -12,11 +13,11 @@ function App() {
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  const dispatch = useDispatch();
 
   const signoutHandler = () => {
-
-    
-  }
+    dispatch(signout());
+  };
 
   return (
     <BrowserRouter>
