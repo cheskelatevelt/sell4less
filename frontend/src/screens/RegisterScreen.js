@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { register } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import swal from "sweetalert";
 
 export default function RegisterScreen(props) {
   const [name, setName] = useState("");
@@ -22,7 +23,12 @@ export default function RegisterScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Password must match");
+      swal({
+        title: "Passwords don't match",
+        text: "Make sure that both passwords match",
+        icon: "error",
+        dangerMode: true,
+      });
     } else {
       dispatch(register(name, email, password));
     }
