@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import state from "sweetalert/typings/modules/state";
 
 const orderSchema = new mongoose.Schema(
   {
