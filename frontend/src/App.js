@@ -11,6 +11,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -40,25 +41,30 @@ function App() {
                 <span className="badge">{cartItems.length}</span>
               )}
             </Link>
-
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
-                  {userInfo.name}
-                  <i className="fa fa-caret-down"></i>{" "}
+                  {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
                 </Link>
                 <ul className="dropdown-content">
-                  <Link to="#signout" onClick={signoutHandler}>
-                    Sign Out
-                  </Link>
+                  <li>
+                    <Link to="/profile">User Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory">Order History</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={signoutHandler}>
+                      Sign Out
+                    </Link>
+                  </li>
                 </ul>
               </div>
             ) : (
-              <Link to="/signin">Sign in</Link>
+              <Link to="/signin">Sign In</Link>
             )}
           </div>
         </header>
-
         <main>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/product/:id" component={ProductScreen}></Route>
@@ -68,13 +74,13 @@ function App() {
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
+          {/* <Route path="/orderhistory" component={OrderHistoryScreen}></Route> */}
+          <Route path="/profile" component={ProfileScreen}></Route>
           <Route path="/" component={HomeScreen} exact></Route>
         </main>
-
-        <footer className="row center">All rights reserved</footer>
+        <footer className="row center">All right reserved</footer>
       </div>
     </BrowserRouter>
   );
 }
-
 export default App;
