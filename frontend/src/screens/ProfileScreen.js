@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { detailUser } from "../actions/userActions";
+import { detailUser, updateUserProfile } from "../actions/userActions";
 import MessageBox from "../components/MessageBox";
 import LoadinBox from "../components/LoadingBox";
 import swal from "sweetalert";
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 export default function ProfileScreen() {
   const [name, setName] = useState("");
@@ -15,9 +16,18 @@ export default function ProfileScreen() {
   const { userInfo } = userSignin;
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const {
+    success: successUpdate,
+    error: errorUpdate,
+    loading: loadingUpdate,
+  } = userUpdateProfile;
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (!user) {
+      dispatch({ type: USER_UPDATE_PROFILE_RESET });
       dispatch(detailUser(userInfo._id));
     } else {
       setName(user.name);
@@ -26,7 +36,6 @@ export default function ProfileScreen() {
   }, [dispatch, userInfo._id, user]);
   const submitHandler = (e) => {
     e.preventDefault();
-    //dispatch update profile
     if (password !== confirmPassword) {
       swal({
         title: "Passwords don't match",
@@ -35,7 +44,7 @@ export default function ProfileScreen() {
         dangerMode: true,
       });
     } else {
-      //dispatch(updateUserProfile({ userId: user._id, name, email, password }));
+      dispatch(updateUserProfile({ userId: user._id, name, email, password }));
     }
   };
   return (
@@ -44,12 +53,20 @@ export default function ProfileScreen() {
         <div>
           <h1>User Profile</h1>
         </div>
+
         {loading ? (
           <LoadinBox></LoadinBox>
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <>
+            {loadingUpdate && <LoadinBox></LoadinBox>}
+            {errorUpdate && (
+              <MessageBox variant="danger">{errorUpdate}</MessageBox>
+            )}
+            {successUpdate && (
+              <MessageBox variant="success">Profile updated successfully</MessageBox>
+            )}
             <div>
               <label htmlFor="name">Name</label>
               <input
