@@ -18,6 +18,10 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
   const addToCartHandler = () => {
+    swal("Product Added To Cart", "Redirecting you to your cart", "success", {
+      buttons: false,
+      timer: 2000,
+    });
     props.history.push(`/cart/${productId}?qty=${qty}`);
   };
 
@@ -101,15 +105,6 @@ export default function ProductScreen(props) {
                         <button
                           onClick={(e) => {
                             addToCartHandler(e);
-                            swal(
-                              "Product Added To Cart",
-                              "Redirecting you to your cart",
-                              "success",
-                              {
-                                buttons: false,
-                                timer: 2000,
-                              }
-                            );
                           }}
                           className="primary block"
                         >
