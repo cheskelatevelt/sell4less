@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { detailsProduct } from "../actions/productActions";
+import swal from "sweetalert";
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -98,7 +99,18 @@ export default function ProductScreen(props) {
                       </li>
                       <li>
                         <button
-                          onClick={addToCartHandler}
+                          onClick={(e) => {
+                            addToCartHandler(e);
+                            swal(
+                              "Product Added To Cart",
+                              "Redirecting you to your cart",
+                              "success",
+                              {
+                                buttons: false,
+                                timer: 2000,
+                              }
+                            );
+                          }}
                           className="primary block"
                         >
                           Add To Cart

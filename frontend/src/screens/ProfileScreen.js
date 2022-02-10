@@ -65,7 +65,9 @@ export default function ProfileScreen() {
               <MessageBox variant="danger">{errorUpdate}</MessageBox>
             )}
             {successUpdate && (
-              <MessageBox variant="success">Profile updated successfully</MessageBox>
+              <MessageBox variant="success">
+                Profile updated successfully
+              </MessageBox>
             )}
             <div>
               <label htmlFor="name">Name</label>
