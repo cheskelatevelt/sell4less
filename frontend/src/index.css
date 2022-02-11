@@ -87,6 +87,10 @@ button{
   -moz-osx-font-smoothing: grayscale;
 }
 
+input.disabled:hover{
+  cursor: not-allowed;
+}
+
 button{
   background-color: #f8f8f8;
   cursor: pointer;

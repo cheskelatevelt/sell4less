@@ -121,11 +121,13 @@ export default function ProductEditScreen(props) {
             <div>
               <label htmlFor="image">Image</label>
               <input
+                className="disabled"
                 id="image"
                 type="text"
                 placeholder="Enter image"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
+                disabled
               ></input>
             </div>
             <div>
