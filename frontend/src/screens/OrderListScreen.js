@@ -1,24 +1,48 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listOrders } from "../actions/orderActions";
+import { deleteOrder, listOrders } from "../actions/orderActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import swal from "sweetalert";
+import { ORDER_DELETE_RESET } from "../constants/orderConstants";
 
 export default function OrderListScreen(props) {
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
+  const orderDelete = useSelector((state) => state.orderDelete);
+  const {
+    loading: loadinfDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = orderDelete;
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch({ type: ORDER_DELETE_RESET });
     dispatch(listOrders());
-  }, [dispatch]);
+  }, [dispatch, successDelete]);
   const deleteHandler = (order) => {
-    //TODO Delete handler
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this order!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        dispatch(deleteOrder(order._id));
+        swal(`Order ${order._id} has been deleted`, {
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
     <div>
       <div>
         <h1>Orders</h1>
+        {loadinfDelete && <LoadingBox></LoadingBox>}
+        {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
