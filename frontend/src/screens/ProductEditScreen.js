@@ -59,6 +59,7 @@ export default function ProductEditScreen(props) {
       })
     );
   };
+
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState("");
 
@@ -111,6 +112,7 @@ export default function ProductEditScreen(props) {
                 placeholder="Enter name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
               ></input>
             </div>
             <div>
@@ -121,6 +123,7 @@ export default function ProductEditScreen(props) {
                 placeholder="Enter price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
+                required
               ></input>
             </div>
             <div>
@@ -176,6 +179,7 @@ export default function ProductEditScreen(props) {
                 placeholder="Enter countInStock"
                 value={countInStock}
                 onChange={(e) => setCountInStock(e.target.value)}
+                required
               ></input>
             </div>
             <div>
