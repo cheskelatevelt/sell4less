@@ -99,6 +99,11 @@ export default function ProductEditScreen(props) {
         ) : (
           <>
             <div>
+              <img
+                className="large"
+                src={product.image}
+                alt={product.name}
+              ></img>
               <label htmlFor="name">Name</label>
               <input
                 id="name"
