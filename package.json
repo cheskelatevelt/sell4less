@@ -1,5 +1,5 @@
 {
-  "name": "amazona",
+  "name": "sell4less",
   "type": "module",
   "version": "1.0.0",
   "description": "",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cheskel2562/amazona.git"
+    "url": "git+https://github.com/Cheskel2562/sell4less.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Cheskel2562/amazona/issues"
+    "url": "https://github.com/Cheskel2562/sell4less/issues"
   },
-  "homepage": "https://github.com/Cheskel2562/amazona#readme",
+  "homepage": "https://github.com/Cheskel2562/sell4less#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "dotenv": "^15.0.0",
