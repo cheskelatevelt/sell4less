@@ -18,7 +18,8 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
   const addToCartHandler = () => {
-    swal("Product Added To Cart", "Redirecting you to your cart", "success", {
+    swal("Product Added To Cart", "Redirecting you to your cart",
+     "success", {
       buttons: false,
       timer: 2000,
     });
