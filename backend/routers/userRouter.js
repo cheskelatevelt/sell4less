@@ -103,8 +103,8 @@ userRouter.get(
 
 userRouter.delete(
   "/:id",
-  isAdmin,
   isAuth,
+  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
