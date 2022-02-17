@@ -44,12 +44,12 @@ productRouter.post(
       name: "Sample name" + Date.now(),
       image: "/images/image-coming-soon.jpg",
       price: 0,
-      category: "",
-      brand: "",
+      category: "Sample Category",
+      brand: "Sample Brand",
       countInStock: 0,
       rating: 0,
       numReviews: 0,
-      description: "",
+      description: 0,
     });
     const createdProduct = await product.save();
     res.send({ message: "Product Created", product: createdProduct });
