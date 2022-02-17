@@ -57,7 +57,8 @@ const data = {
     {
       name: "Beige Pants",
       category: "Pants",
-      image: "/images/image-coming-soon.jpg",
+      image: "/images/product-1.jpg",
+      
       price: 120,
       countInStock: 7,
       brand: "Calvin Klein",
