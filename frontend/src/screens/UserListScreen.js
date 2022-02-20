@@ -5,7 +5,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import swal from "sweetalert";
 
-export default function UserListScreen() {
+export default function UserListScreen(props) {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
@@ -69,7 +69,7 @@ export default function UserListScreen() {
                 <td>{user.isSeller ? "YES" : " NO"}</td>
                 <td>{user.isAdmin ? "YES" : "NO"}</td>
                 <td>
-                  <button type="button" className="small">
+                  <button type="button" className="small" onClick={() => props.history.push(`/user/${user._id}/edit`)}>
                     Edit
                   </button>
                   <button
