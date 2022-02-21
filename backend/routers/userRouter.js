@@ -80,9 +80,9 @@ userRouter.put(
       user.email = req.body.email || user.email;
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
-        user.seller.logo = req.body.logo || user.seller.logo;
+        user.seller.logo = req.body.sellerLogo || user.seller.logo;
         user.seller.description =
-          req.body.description || user.seller.description;
+          req.body.sellerDescription || user.seller.description;
       }
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
