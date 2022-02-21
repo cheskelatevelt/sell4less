@@ -104,6 +104,8 @@ export default function ProductListScreen(props) {
               <th>Price</th>
               <th>Category</th>
               <th>Brand</th>
+              <th>Seller</th>
+
               <th>Count In Stock</th>
               <th>Actions</th>
             </tr>
@@ -124,6 +126,7 @@ export default function ProductListScreen(props) {
                 <td>${product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
+                <td>{product.seller.seller.name}</td>
                 <td>{product.countInStock}</td>
 
                 <td>
