@@ -141,11 +141,11 @@ function App() {
             component={UserEditScreen}
           ></AdminRoute>
           <SellerRoute
-            path="productlist/seller"
+            path="/productlist/seller"
             component={ProductListScreen}
           ></SellerRoute>
           <SellerRoute
-            path="orderlist/seller"
+            path="/orderlist/seller"
             component={OrderListScreen}
           ></SellerRoute>
 
