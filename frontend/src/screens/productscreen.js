@@ -18,8 +18,7 @@ export default function ProductScreen(props) {
     dispatch(detailsProduct(productId));
   }, [dispatch, productId]);
   const addToCartHandler = () => {
-    swal("Product Added To Cart", "Redirecting you to your cart",
-     "success", {
+    swal("Product Added To Cart", "Redirecting you to your cart", "success", {
       buttons: false,
       timer: 2000,
     });
@@ -55,14 +54,24 @@ export default function ProductScreen(props) {
                   ></Rating>
                 </li>
                 <li>Price: {"$" + product.price}</li>
-                <li>
-                  Description:
-                </li>
+                <li>Description:</li>
               </ul>
             </div>
             <div className="col-1">
               <div className="card card-body">
                 <ul>
+                  <li>
+                    Seller{" "}
+                    <h2>
+                      <Link to={`/seller/${product.seller._id}`}>
+                        {product.seller.seller.name}
+                      </Link>
+                    </h2>
+                    <Rating
+                      rating={product.seller.seller.rating}
+                      numReviews={product.seller.seller.numReviews}
+                    ></Rating>
+                  </li>
                   <li>
                     <div className="row"></div>
                     <div>Price</div>
