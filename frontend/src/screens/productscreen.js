@@ -9,10 +9,12 @@ import swal from "sweetalert";
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
+  
   const productId = props.match.params.id;
   const [qty, setQty] = useState(1);
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
+  
 
   useEffect(() => {
     dispatch(detailsProduct(productId));
@@ -53,7 +55,11 @@ export default function ProductScreen(props) {
                     numReviews={product.numReviews}
                   ></Rating>
                 </li>
-                <li>Price: {"$" + product.price}</li>
+                <li>List Price: {"$" + product.listPrice}</li>
+                <li>Sale Price: {"$" + product.salePrice}</li>
+                <li>You Saved: {"$" + (product.listPrice - product.salePrice)}</li>
+
+
                 <li>Description:</li>
               </ul>
             </div>
@@ -74,8 +80,14 @@ export default function ProductScreen(props) {
                   </li>
                   <li>
                     <div className="row"></div>
-                    <div>Price</div>
-                    <div className="price">{"$" + product.price}</div>
+                    <div>List Price</div>
+                    <div className="listPrice">{"$" + product.listPrice}</div>
+                    <div>Sale Price</div>
+                    <div className="salePrice">{"$" + product.salePrice}</div>
+                    <div>You Save</div>
+                    <div className="discount">{"$" + (product.listPrice - product.salePrice)}</div>
+
+
                   </li>
                   <li>
                     <div className="row">

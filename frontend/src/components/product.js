@@ -4,7 +4,12 @@ import Rating from "./rating";
 
 export default function Product(props) {
   const { product } = props;
+  const discountAmount = (product.listPrice - product.salePrice);
+  const discountPercent = (product.salePrice / product.listPrice);
+
+
   return (
+    
     <div key={product._id} className="card">
       <Link to={`/product/${product._id}`}>
         <img className="medium" src={product.image} alt={product.name} />
@@ -18,9 +23,16 @@ export default function Product(props) {
           rating={product.rating}
           numReviews={product.numReviews}
         ></Rating>
-
+        
         <div className="row">
-          <div className="price">{"$" + product.price}</div>
+          <div className="salePrice">{"$" + product.salePrice}</div>
+          <div className="listPrice">{"$" + product.listPrice}</div>
+          <div className="discount">{"$" + discountAmount}</div>
+          <div className="discount">{"%" + discountPercent}</div>
+
+
+            
+
           <div>
             <Link to={`/seller/${product.seller._id}`}>
               {product.seller.seller.name}

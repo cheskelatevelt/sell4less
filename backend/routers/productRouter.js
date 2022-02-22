@@ -56,7 +56,9 @@ productRouter.post(
       name: "Sample name" + Date.now(),
       seller: req.user._id,
       image: "/images/image-coming-soon.jpg",
-      price: 0,
+      listPrice: 0,
+      salePrice: 0,
+
       category: "Sample Category",
       brand: "Sample Brand",
       countInStock: 0,
@@ -78,7 +80,9 @@ productRouter.put(
     const product = await Product.findById(productId);
     if (product) {
       product.name = req.body.name;
-      product.price = req.body.price;
+      product.listPrice = req.body.listPrice;
+      product.salePrice = req.body.salePrice;
+
       product.image = req.body.image;
       product.category = req.body.category;
       product.brand = req.body.brand;

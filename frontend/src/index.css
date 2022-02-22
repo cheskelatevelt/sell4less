@@ -222,10 +222,15 @@ img.large{
   margin-bottom: 0.5rem;
 }
 
-.price{
-  font-size: 2rem;
+.listPrice{
+  font-size: 1.5rem;
+  text-decoration: line-through;
+
 }
 
+.salePrice{
+  font-size: 2rem;
+}
 /* Rating */
 .rating span{
   color: #f0c040;

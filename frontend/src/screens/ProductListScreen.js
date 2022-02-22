@@ -101,7 +101,9 @@ export default function ProductListScreen(props) {
               <th>ID</th>
               <th>Name</th>
               <th>Image</th>
-              <th>Price</th>
+              <th>List Price</th>
+              <th>Sale Price</th>
+
               <th>Category</th>
               <th>Brand</th>
               <th>Seller</th>
@@ -123,7 +125,9 @@ export default function ProductListScreen(props) {
                   ></img>
                 </td>
 
-                <td>${product.price}</td>
+                <td>${product.listPrice}</td>
+                <td>${product.salePrice}</td>
+
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
                 <td>{product.seller.seller.name}</td>

@@ -9,7 +9,9 @@ import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [listPrice, setListPrice] = useState("");
+  const [salePrice, setSalePrice] = useState("");
+
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState("");
@@ -36,7 +38,9 @@ export default function ProductEditScreen(props) {
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
-      setPrice(product.price);
+      setListPrice(product.listPrice);
+
+      setSalePrice(product.salePrice);
       setImage(product.image);
       setCategory(product.category);
       setCountInStock(product.countInStock);
@@ -50,7 +54,8 @@ export default function ProductEditScreen(props) {
       updateProduct({
         _id: productId,
         name,
-        price,
+        listPrice,
+        salePrice,
         image,
         category,
         brand,
@@ -116,13 +121,24 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="price">Price</label>
+              <label htmlFor="listPrice">List Price</label>
               <input
-                id="price"
+                id="listPrice"
                 type="text"
-                placeholder="Enter price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                placeholder="Enter List price"
+                value={listPrice}
+                onChange={(e) => setListPrice(e.target.value)}
+                required
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="salePrice">Sale Price</label>
+              <input
+                id="salePrice"
+                type="text"
+                placeholder="Enter sale price"
+                value={salePrice}
+                onChange={(e) => setSalePrice(e.target.value)}
                 required
               ></input>
             </div>
