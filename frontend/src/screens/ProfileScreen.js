@@ -5,6 +5,8 @@ import MessageBox from "../components/MessageBox";
 import LoadinBox from "../components/LoadingBox";
 import swal from "sweetalert";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
+import LoadingBox from "../components/LoadingBox";
+import Axios from 'axios';
 
 export default function ProfileScreen() {
   const [name, setName] = useState("");
@@ -26,6 +28,30 @@ export default function ProfileScreen() {
     error: errorUpdate,
     loading: loadingUpdate,
   } = userUpdateProfile;
+
+  const [loadingUpload, setLoadingUpload] = useState(false);
+  const [errorUpload, setErrorUpload] = useState('');
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('image', file);
+    setLoadingUpload(true);
+    try {
+      const { data } = await Axios.post('/api/uploads', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      setSellerLogo(data);
+      setLoadingUpload(false);
+    } catch (error) {
+      setErrorUpload(error.message);
+      setLoadingUpload(false);
+    }
+  };
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -60,6 +86,7 @@ export default function ProfileScreen() {
           password,
           sellerName,
           sellerLogo,
+          
           sellerDescription,
         })
       );
@@ -140,15 +167,18 @@ export default function ProfileScreen() {
                 </div>
 
                 <div>
-                  <label htmlFor="sellerLogo">Seller Logo</label>
-                  <input
-                    id="sellerLogo"
-                    type="text"
-                    placeholder="Enter Seller Name"
-                    value={sellerLogo}
-                    onChange={(e) => setSellerLogo(e.target.value)}
-                  ></input>
-                </div>
+              <label htmlFor="sellerLogo">Seller Logo</label>
+              <input
+                type="file"
+                id="sellerLogo"
+                label="Choose Image"
+                onChange={uploadFileHandler}
+              ></input>
+              {loadingUpload && <LoadingBox></LoadingBox>}
+              {errorUpload && (
+                <MessageBox variant="danger">{errorUpload}</MessageBox>
+              )}
+            </div>
 
                 <div>
                   <label htmlFor="sellerDescription">Seller Description</label>
