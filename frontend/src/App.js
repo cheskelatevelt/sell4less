@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import HomeScreen from "./screens/homescreen";
 import ProductScreen from "./screens/productscreen";
@@ -24,6 +24,7 @@ import SellerRoute from "./components/SellerRoute";
 import SellerScreen from "./screens/SellerScreen";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
+import { listProductCategories } from "./actions/productActions";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -36,6 +37,10 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   };
+
+  useEffect(() => {
+    dispatch(listProductCategories)
+  },[dispatch])
 
   return (
     <BrowserRouter>

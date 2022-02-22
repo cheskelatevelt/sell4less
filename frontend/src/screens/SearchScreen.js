@@ -11,6 +11,11 @@ export default function SearchScreen(props) {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
+
+  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const { loading: loadingCategories, error: errorCategories, categories } = productCategoryList;
+
+
   useEffect(() => {
     dispatch(listProducts({ name: name !== "all" ? name : "" }));
   }, [dispatch, name]);
@@ -28,6 +33,13 @@ export default function SearchScreen(props) {
       <div className="row top">
         <div className="col-1">
           <h3>Department</h3>
+          {loading ? (
+          <LoadingBox></LoadingBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <div>{products.length} Results</div>
+        )}
           <ul>
             <li>Category 1</li>
           </ul>
