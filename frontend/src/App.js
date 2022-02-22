@@ -43,7 +43,7 @@ function App() {
         <header className="row">
           <div>
             <Link className="brand" to="/">
-              Sell 4 Less
+              <img className="brand" src="/logo-transparent.png" alt="logo"></img>
             </Link>
           </div>
           <div>

@@ -32,6 +32,7 @@ body{
 header{
   grid-area: header;
   background-color: #203040;
+  height: 90px;
 }
 
 main {
@@ -210,7 +211,7 @@ img.large{
   border: 0.1rem #c0c0c0 solid;
   background-color: #f8f8f8;
   border-radius: 0.5rem;
-  margin: 1rem;
+  margin: 5rem;
   
 }
 
@@ -268,6 +269,11 @@ img.large{
 .alert-success{
   color: #20a020;
   background-color: #eeffe0;
+}
+
+.brand{
+  width: 250px;
+  height: auto;
 }
 
 /* Form */
@@ -360,5 +366,5 @@ img.large{
   border-radius: 0.5rem 0 0 0.5rem;
   border-right: none;
   margin-left: 0.5rem;
-  width: 500px;
+  width: 300px;
 }
