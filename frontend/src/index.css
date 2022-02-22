@@ -30,6 +30,8 @@ body{
 }
 
 header{
+  position: fixed;
+  width: 100%;
   grid-area: header;
   background-color: #203040;
   height: 90px;
