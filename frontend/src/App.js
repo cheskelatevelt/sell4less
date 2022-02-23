@@ -142,6 +142,16 @@ function App() {
             component={SearchScreen}
             exact
           ></Route>
+           <Route
+            path="/search/category/:category"
+            component={SearchScreen}
+            exact
+          ></Route>
+           <Route
+            path="/search/category/:category/name/:name"
+            component={SearchScreen}
+            exact
+          ></Route>
           <PrivateRoute
             path="/profile"
             component={ProfileScreen}
