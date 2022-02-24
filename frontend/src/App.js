@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import HomeScreen from "./screens/homescreen";
 import ProductScreen from "./screens/productscreen";
@@ -28,6 +28,7 @@ import { listProductCategories } from "./actions/productActions";
 
 function App() {
   const cart = useSelector((state) => state.cart);
+  const [sidebarIsOpen, setsidebarIsOpen] = useState(false);
   const { cartItems } = cart;
 
   const userSignin = useSelector((state) => state.userSignin);
@@ -39,16 +40,27 @@ function App() {
   };
 
   useEffect(() => {
-    dispatch(listProductCategories)
-  },[dispatch])
+    dispatch(listProductCategories);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
           <div>
+            <button
+              type="button"
+              className="open-sidebar"
+              onClick={() => setsidebarIsOpen(true)}
+            >
+              <i className="fa fa-bars"></i>
+            </button>
             <Link className="brand" to="/">
-              <img className="brand" src="/logo-transparent.png" alt="logo"></img>
+              <img
+                className="brand"
+                src="/logo-transparent.png"
+                alt="logo"
+              ></img>
             </Link>
           </div>
           <div>
@@ -125,6 +137,21 @@ function App() {
             )}
           </div>
         </header>
+
+        <aside className={sidebarIsOpen ? "open" : ""}>
+          <ul className="categories">
+            <li>
+              <strong>Categories</strong>
+              <button
+                onClick={() => setsidebarIsOpen(false)}
+                className="close-sidebar"
+                type="button"
+              >
+                <i className="fa fa-close"></i>
+              </button>
+            </li>
+          </ul>
+        </aside>
         <main>
           <Route path="/seller/:id" component={SellerScreen}></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
@@ -142,12 +169,12 @@ function App() {
             component={SearchScreen}
             exact
           ></Route>
-           <Route
+          <Route
             path="/search/category/:category"
             component={SearchScreen}
             exact
           ></Route>
-           <Route
+          <Route
             path="/search/category/:category/name/:name"
             component={SearchScreen}
             exact

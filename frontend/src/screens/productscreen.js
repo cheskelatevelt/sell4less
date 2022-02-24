@@ -55,6 +55,7 @@ export default function ProductScreen(props) {
                 </li>
                 <li>Price: {"$" + product.price}</li>
                 <li>Description:</li>
+                <p className="description">{product.description}</p>
               </ul>
             </div>
             <div className="col-1">
