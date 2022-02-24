@@ -25,6 +25,8 @@ import SellerScreen from "./screens/SellerScreen";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
 import { listProductCategories } from "./actions/productActions";
+import LoadingBox from "./components/LoadingBox";
+import MessageBox from "./components/MessageBox";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -39,30 +41,31 @@ function App() {
     dispatch(signout());
   };
 
+  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const {
+    loading: loadingCategories,
+    error: errorCategories,
+    categories,
+  } = productCategoryList;
+
   useEffect(() => {
-    dispatch(listProductCategories);
+    dispatch(listProductCategories());
   }, [dispatch]);
 
   return (
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
-          <div>
-            <button
-              type="button"
-              className="open-sidebar"
-              onClick={() => setsidebarIsOpen(true)}
-            >
-              <i className="fa fa-bars"></i>
-            </button>
-            <Link className="brand" to="/">
-              <img
-                className="brand"
-                src="/logo-transparent.png"
-                alt="logo"
-              ></img>
-            </Link>
-          </div>
+          <button
+            type="button"
+            className="open-sidebar"
+            onClick={() => setsidebarIsOpen(true)}
+          >
+            <i className="fa fa-bars"></i>
+          </button>
+          <Link className="brand" to="/">
+            <img className="brand" src="/logo-transparent.png" alt="logo"></img>
+          </Link>
           <div>
             <Route
               render={({ history }) => (
@@ -150,6 +153,22 @@ function App() {
                 <i className="fa fa-close"></i>
               </button>
             </li>
+            {loadingCategories ? (
+              <LoadingBox></LoadingBox>
+            ) : errorCategories ? (
+              <MessageBox variant="danger">{errorCategories}</MessageBox>
+            ) : (
+              categories.map((c) => (
+                <li key={c}>
+                  <Link
+                    to={`/search/category/${c}`}
+                    onClick={() => setsidebarIsOpen(false)}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))
+            )}
           </ul>
         </aside>
         <main>

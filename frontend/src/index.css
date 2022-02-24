@@ -34,7 +34,7 @@ header{
   width: 100%;
   grid-area: header;
   background-color: #203040;
-  height: 90px;
+  height: 100px;
 }
 
 main {
@@ -200,6 +200,7 @@ aside{
   background-color: #efefef;
   z-index: 1000;
   transform: translateX(-30rem);
+  transition: all 0.5s;
 }
 
 aside.open{
@@ -219,6 +220,20 @@ button.open-sidebar:hover{
   border-color: #ffffff;
 }
 
+aside ul{
+  padding: 0;
+  list-style: none;
+}
+
+aside li{
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+button.close-sidebar{
+  padding: 0.3rem 0.8rem;
+}
 /* Image */
 img {
   border-radius: 0.5rem;
