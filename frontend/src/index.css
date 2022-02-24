@@ -101,7 +101,6 @@ button{
 }
 
 p{
-  border:1px #f0c040 solid;
 border-radius: 2px;
 }
 
@@ -419,5 +418,9 @@ img.large{
   border-right: none;
   margin-left: 0.5rem;
   width: 300px;
+}
+
+.active {
+  font-weight: bold;
 }
 
