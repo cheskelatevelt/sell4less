@@ -12,6 +12,8 @@ productRouter.get(
     const name = req.query.name || "";
     const category = req.query.category || "";
     const seller = req.query.seller || "";
+
+    const order = req.query.order || "";
     const min =
       req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
     const max =
@@ -26,6 +28,14 @@ productRouter.get(
     const nameFilter = name ? { name: { $regex: name, $options: "i" } } : {};
     const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
     const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+    const sortOrder =
+      order === "lowest"
+        ? { price: 1 }
+        : order === "highest"
+        ? { price: -1 }
+        : order === "toprated"
+        ? { rating: -1 }
+        : { _id: -1 };
 
     const products = await Product.find({
       ...sellerFilter,
@@ -33,7 +43,9 @@ productRouter.get(
       ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
-    }).populate("seller", "seller.name seller.logo");
+    })
+      .populate("seller", "seller.name seller.logo")
+      .sort(sortOrder);
     res.send(products);
   })
 );

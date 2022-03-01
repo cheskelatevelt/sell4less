@@ -46,6 +46,7 @@ export default function ProductScreen(props) {
               <ul>
                 <li>
                   <h1>{product.name}</h1>
+                  {/* <h1>Color: {product.color}</h1> */}
                 </li>
                 <li>
                   <Rating
