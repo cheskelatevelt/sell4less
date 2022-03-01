@@ -90,6 +90,7 @@ productRouter.post(
     const product = new Product({
       name: "Sample name" + Date.now(),
       seller: req.user._id,
+      color: "black",
       image: "/images/image-coming-soon.jpg",
       price: 0,
       category: "Sample Category",
@@ -114,6 +115,8 @@ productRouter.put(
     if (product) {
       product.name = req.body.name;
       product.price = req.body.price;
+      product.color = req.body.color;
+
       product.image = req.body.image;
       product.category = req.body.category;
       product.brand = req.body.brand;

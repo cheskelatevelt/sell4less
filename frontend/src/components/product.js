@@ -12,6 +12,15 @@ export default function Product(props) {
       <div className="card-body">
         <Link to={`/product/${product._id}`}>
           <h2>{product.name}</h2>
+
+          <div className="row-color">
+            <span>Available Colors:</span>
+
+            <span
+              className="circle-small"
+              style={{ backgroundColor: product.color }}
+            ></span>
+          </div>
         </Link>
 
         <Rating

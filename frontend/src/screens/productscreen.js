@@ -46,7 +46,10 @@ export default function ProductScreen(props) {
               <ul>
                 <li>
                   <h1>{product.name}</h1>
-                  {/* <h1>Color: {product.color}</h1> */}
+                  <h1>Color:</h1>
+                  <div className="circle" style={{backgroundColor: product.color}}>
+                    
+                  </div>
                 </li>
                 <li>
                   <Rating

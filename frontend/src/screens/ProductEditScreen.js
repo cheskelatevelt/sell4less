@@ -9,7 +9,7 @@ import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 export default function ProductEditScreen(props) {
   const productId = props.match.params.id;
   const [name, setName] = useState("");
-  // const [color, setColor] = useState("");
+  const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
@@ -37,7 +37,7 @@ export default function ProductEditScreen(props) {
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
-      // setColor(product.color);
+      setColor(product.color);
       setPrice(product.price);
       setImage(product.image);
       setCategory(product.category);
@@ -52,7 +52,7 @@ export default function ProductEditScreen(props) {
       updateProduct({
         _id: productId,
         name,
-        // color,
+        color,
         price,
         image,
         category,
@@ -118,16 +118,16 @@ export default function ProductEditScreen(props) {
                 required
               ></input>
             </div>
-            {/* <div>
+            <div>
               <label htmlFor="color">Color</label>
-              <input
+              <input className="circle"
                 id="color"
                 type="color"
-                placeholder="Choose Color"
                 value={color}
+                
                 onChange={(e) => setColor(e.target.value)}
               ></input>
-            </div> */}
+            </div>
             <div>
               <label htmlFor="price">Price</label>
               <input
@@ -139,7 +139,7 @@ export default function ProductEditScreen(props) {
                 required
               ></input>
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="image">Image</label>
               <input
                 className="disabled"
@@ -150,7 +150,7 @@ export default function ProductEditScreen(props) {
                 onChange={(e) => setImage(e.target.value)}
                 disabled
               ></input>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="imageFile">Image File</label>
               <input

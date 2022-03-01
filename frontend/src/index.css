@@ -424,3 +424,21 @@ img.large{
   font-weight: bold;
 }
 
+.circle {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.circle-small {
+  height:25px;
+  width: 25px;
+  border-radius: 50%;
+  float: left;
+}
+
+.row-color{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
