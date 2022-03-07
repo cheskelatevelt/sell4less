@@ -1,63 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
-import { detailsProduct, updateProduct } from "../actions/productActions";
+import { detailsJob, updateJob } from "../actions/jobActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import { JOB_UPDATE_RESET } from "../constants/jobConstants";
 
-export default function ProductEditScreen(props) {
-  const productId = props.match.params.id;
+export default function JobEditScreen(props) {
+  const jobId = props.match.params.id;
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
-  const [countInStock, setCountInStock] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
 
-  const productDetails = useSelector((state) => state.productDetails);
-  const { loading, error, product } = productDetails;
+  const jobDetails = useSelector((state) => state.jobDetails);
+  const { loading, error, job } = jobDetails;
 
-  const productUpdate = useSelector((state) => state.productUpdate);
+  const jobUpdate = useSelector((state) => state.jobUpdate);
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = productUpdate;
+  } = jobUpdate;
 
   const dispatch = useDispatch();
   useEffect(() => {
     if (successUpdate) {
-      props.history.push("/productlist");
+      props.history.push("/joblist");
     }
-    if (!product || product._id !== productId || successUpdate) {
-      dispatch({ type: PRODUCT_UPDATE_RESET });
-      dispatch(detailsProduct(productId));
+    if (!job || job._id !== jobId || successUpdate) {
+      dispatch({ type: JOB_UPDATE_RESET });
+      dispatch(detailsJob(jobId));
     } else {
-      setName(product.name);
-      setColor(product.color);
-      setPrice(product.price);
-      setImage(product.image);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setBrand(product.brand);
-      setDescription(product.description);
+      setName(job.name);
+      setColor(job.color);
+      setPrice(job.price);
+      setImage(job.image);
+      setCategory(job.category);
+      setBrand(job.brand);
+      setDescription(job.description);
     }
-  }, [product, dispatch, productId, successUpdate, props.history]);
+  }, [job, dispatch, jobId, successUpdate, props.history]);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      updateProduct({
-        _id: productId,
+      updateJob({
+        _id: jobId,
         name,
         color,
         price,
         image,
         category,
         brand,
-        countInStock,
         description,
       })
     );
@@ -92,7 +89,7 @@ export default function ProductEditScreen(props) {
     <div>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Edit Product {productId}</h1>
+          <h1>Edit Job {jobId}</h1>
         </div>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant="danger">{errorUpdate}</MessageBox>}
@@ -105,8 +102,8 @@ export default function ProductEditScreen(props) {
             <div>
               <img
                 className="large"
-                src={product.image}
-                alt={product.name}
+                src={job.image}
+                alt={job.name}
               ></img>
               <label htmlFor="name">Name</label>
               <input
@@ -184,17 +181,7 @@ export default function ProductEditScreen(props) {
                 onChange={(e) => setBrand(e.target.value)}
               ></input>
             </div>
-            <div>
-              <label htmlFor="countInStock">Count In Stock</label>
-              <input
-                id="countInStock"
-                type="text"
-                placeholder="Enter countInStock"
-                value={countInStock}
-                onChange={(e) => setCountInStock(e.target.value)}
-                required
-              ></input>
-            </div>
+
             <div>
               <label htmlFor="description">Description</label>
               <textarea

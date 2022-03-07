@@ -68,7 +68,7 @@ export default function PlaceOrderScreen(props) {
                 <h2>Order Items</h2>
                 <ul>
                   {cart.cartItems.map((item) => (
-                    <li key={item.product}>
+                    <li key={item.job}>
                       <div className="row">
                         <div>
                           <img
@@ -78,9 +78,7 @@ export default function PlaceOrderScreen(props) {
                           ></img>
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>
+                          <Link to={`/job/${item.job}`}>{item.name}</Link>
                         </div>
 
                         <div>

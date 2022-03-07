@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listProducts } from "../actions/productActions";
+import { listJobs } from "../actions/jobActions";
 import { detailUser } from "../actions/userActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import Product from "../components/product";
-import Rating from "../components/rating";
+import Job from "../components/job";
 
 export default function SellerScreen(props) {
   const sellerId = props.match.params.id;
@@ -13,17 +12,13 @@ export default function SellerScreen(props) {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
-  const productList = useSelector((state) => state.productList);
-  const {
-    loading: loadingProducts,
-    error: errorProducts,
-    products,
-  } = productList;
+  const jobList = useSelector((state) => state.jobList);
+  const { loading: loadingJobs, error: errorJobs, jobs } = jobList;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailUser(sellerId));
-    dispatch(listProducts({ seller: sellerId }));
+    dispatch(listJobs({ seller: sellerId }));
   }, [dispatch, sellerId]);
   return (
     <div className="row top">
@@ -48,12 +43,7 @@ export default function SellerScreen(props) {
                 </div>
               </div>
             </li>
-            <li>
-              <Rating
-                rating={user.seller.rating}
-                numReviews={user.seller.numReviews}
-              ></Rating>
-            </li>
+
             <li>
               <a href={`mailto:${user.email}`}>Contact Seller</a>
             </li>
@@ -63,16 +53,16 @@ export default function SellerScreen(props) {
       </div>
 
       <div className="col-3">
-        {loadingProducts ? (
+        {loadingJobs ? (
           <LoadingBox></LoadingBox>
-        ) : errorProducts ? (
-          <MessageBox variant="danger">{errorProducts}</MessageBox>
+        ) : errorJobs ? (
+          <MessageBox variant="danger">{errorJobs}</MessageBox>
         ) : (
           <>
-            {products.length === 0 && <MessageBox></MessageBox>}
+            {jobs.length === 0 && <MessageBox></MessageBox>}
             <div className="row center">
-              {products.map((product) => (
-                <Product key={product._id} product={product}></Product>
+              {jobs.map((job) => (
+                <Job key={job._id} job={job}></Job>
               ))}
             </div>
           </>

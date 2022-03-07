@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { listProducts } from "../actions/productActions";
+import { listJobs } from "../actions/jobActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import Product from "../components/product";
-import Rating from "../components/rating";
-import { prices, ratings } from "../utils";
+import Job from "../components/job";
+import { prices } from "../utils";
 
 export default function SearchScreen(props) {
   const {
@@ -14,42 +13,39 @@ export default function SearchScreen(props) {
     category = "all",
     min = 0,
     max = 0,
-    rating = 0,
     order = "newest",
   } = useParams();
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const jobList = useSelector((state) => state.jobList);
+  const { loading, error, jobs } = jobList;
 
-  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const jobCategoryList = useSelector((state) => state.jobCategoryList);
   const {
     loading: loadingCategories,
     error: errorCategories,
     categories,
-  } = productCategoryList;
+  } = jobCategoryList;
 
   useEffect(() => {
     dispatch(
-      listProducts({
+      listJobs({
         name: name !== "all" ? name : "",
         category: category !== "all" ? category : "",
         min,
         max,
-        rating,
       })
     );
-  }, [category, dispatch, name, min, max, rating]);
+  }, [category, dispatch, name, min, max]);
 
   const getFilterUrl = (filter) => {
     const filterCategory = filter.category || category;
     const filterName = filter.name || name;
-    const filterRating = filter.rating || rating;
     const sortOrder = filter.order || order;
 
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
 
-    return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}`;
+    return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/order/${sortOrder}`;
   };
   return (
     <div>
@@ -59,7 +55,7 @@ export default function SearchScreen(props) {
         ) : error ? (
           <MessageBox variant="danger">{error}</MessageBox>
         ) : (
-          <div>{products.length} Results</div>
+          <div>{jobs.length} Results</div>
         )}
         <div>
           Sort by{" "}
@@ -124,21 +120,7 @@ export default function SearchScreen(props) {
               ))}
             </ul>
           </div>
-          <div>
-            <h3>Average Rating</h3>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.name}>
-                  <Link
-                    to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? "active" : ""}
-                  >
-                    <Rating caption={"& up"} rating={r.rating}></Rating>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div></div>
         </div>
         <div className="col-3">
           {loading ? (
@@ -147,12 +129,10 @@ export default function SearchScreen(props) {
             <MessageBox variant="danger">{error}</MessageBox>
           ) : (
             <>
-              {products.length === 0 && (
-                <MessageBox>No Product Found</MessageBox>
-              )}
+              {jobs.length === 0 && <MessageBox>No Job Found</MessageBox>}
               <div className="row center">
-                {products.map((product) => (
-                  <Product key={product._id} product={product}></Product>
+                {jobs.map((job) => (
+                  <Job key={job._id} job={job}></Job>
                 ))}
               </div>
             </>

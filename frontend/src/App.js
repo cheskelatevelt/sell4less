@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import HomeScreen from "./screens/homescreen";
-import ProductScreen from "./screens/productscreen";
+import JobsScreen from "./screens/JobsScreen";
 import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,8 +15,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
-import ProductListScreen from "./screens/ProductListScreen";
-import ProductEditScreen from "./screens/ProductEditScreen";
+import JobListScreen from "./screens/JobListScreen";
+import JobEditScreen from "./screens/JobEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
@@ -24,7 +24,7 @@ import SellerRoute from "./components/SellerRoute";
 import SellerScreen from "./screens/SellerScreen";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
-import { listProductCategories } from "./actions/productActions";
+import { listJobCategories } from "./actions/jobActions";
 import LoadingBox from "./components/LoadingBox";
 import MessageBox from "./components/MessageBox";
 
@@ -41,15 +41,15 @@ function App() {
     dispatch(signout());
   };
 
-  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const jobCategoryList = useSelector((state) => state.jobCategoryList);
   const {
     loading: loadingCategories,
     error: errorCategories,
     categories,
-  } = productCategoryList;
+  } = jobCategoryList;
 
   useEffect(() => {
-    dispatch(listProductCategories());
+    dispatch(listJobCategories());
   }, [dispatch]);
 
   return (
@@ -74,8 +74,8 @@ function App() {
             ></Route>
           </div>
           <div>
-            <Link to="/cart">
-              <i className="fa fa-shopping-cart"></i>
+          <Link to="/api/job">
+              <i className="fa fa-heart"></i>
               {cartItems.length > 0 && (
                 <span className="badge">{cartItems.length}</span>
               )}
@@ -109,7 +109,7 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
-                    <Link to="/productlist/seller">Products</Link>
+                    <Link to="/joblist/seller">Jobs</Link>
                   </li>
                   <li>
                     <Link to="/orderlist/seller">Orders</Link>
@@ -127,7 +127,7 @@ function App() {
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
                   <li>
-                    <Link to="/productlist">Products</Link>
+                    <Link to="/joblist">Jobs</Link>
                   </li>
                   <li>
                     <Link to="/orderlist">Orders</Link>
@@ -173,9 +173,9 @@ function App() {
         </aside>
         <main>
           <Route path="/seller/:id" component={SellerScreen}></Route>
-          <Route path="/cart/:id?" component={CartScreen}></Route>
-          <Route path="/product/:id" component={ProductScreen} exact></Route>
-          <Route path="/product/:id/edit" component={ProductEditScreen}></Route>
+          <Route path="/api/job/:id?" component={CartScreen}></Route>
+          <Route path="/job/:id" component={JobsScreen} exact></Route>
+          <Route path="/job/:id/edit" component={JobEditScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
@@ -199,7 +199,7 @@ function App() {
             exact
           ></Route>
           <Route
-            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order"
+            path="/search/category/:category/name/:name/min/:min/max/:max/order/:order"
             component={SearchScreen}
             exact
           ></Route>
@@ -208,8 +208,8 @@ function App() {
             component={ProfileScreen}
           ></PrivateRoute>
           <AdminRoute
-            path="/productlist"
-            component={ProductListScreen}
+            path="/joblist"
+            component={JobListScreen}
             exact
           ></AdminRoute>
           <AdminRoute
@@ -223,8 +223,8 @@ function App() {
             component={UserEditScreen}
           ></AdminRoute>
           <SellerRoute
-            path="/productlist/seller"
-            component={ProductListScreen}
+            path="/joblist/seller"
+            component={JobListScreen}
           ></SellerRoute>
           <SellerRoute
             path="/orderlist/seller"

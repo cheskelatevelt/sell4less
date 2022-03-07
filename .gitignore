@@ -6,13 +6,13 @@
 node_modules
 # testing
 
-# production
+# jobion
 frontend/build
 frontend/.DS_Store
 frontend/.env.local
 frontend/.env.development.local
 frontend/.env.test.local
-frontend/.env.production.local
+frontend/.env.jobion.local
 frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*

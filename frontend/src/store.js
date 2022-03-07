@@ -11,13 +11,13 @@ import {
   orderPayReducer,
 } from "./reducers/orderReducers";
 import {
-  ProductCategoryListReducer,
-  productCreateReducer,
-  productDeleteReducer,
-  ProductDetailsReducer,
-  ProductListReducer,
-  productUpdateReducer,
-} from "./reducers/productReducers";
+  JobCategoryListReducer,
+  jobCreateReducer,
+  jobDeleteReducer,
+  JobDetailsReducer,
+  JobListReducer,
+  jobUpdateReducer,
+} from "./reducers/jobReducers";
 import {
   userDeleteReducer,
   userDetailsReducer,
@@ -47,8 +47,8 @@ const initialState = {
 };
 
 const reducer = combineReducers({
-  productList: ProductListReducer,
-  productDetails: ProductDetailsReducer,
+  jobList: JobListReducer,
+  jobDetails: JobDetailsReducer,
   cart: cartReducer,
   userRegister: userRegisterReducer,
   userSignin: userSigninReducer,
@@ -59,16 +59,16 @@ const reducer = combineReducers({
   orderHistory: orderHistoryReducer,
   userUpdateProfile: userUpdateProfileReducer,
   userUpdate: userUpdateReducer,
-  productCreate: productCreateReducer,
-  productUpdate: productUpdateReducer,
+  jobCreate: jobCreateReducer,
+  jobUpdate: jobUpdateReducer,
   orderList: orderListReducer,
-  productDelete: productDeleteReducer,
+  jobDelete: jobDeleteReducer,
   orderDelete: orderDeleteReducer,
   orderDeliver: orderDeliverReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userTopSellersList: userTopSellerListReducer,
-  productCategoryList: ProductCategoryListReducer
+  jobCategoryList: JobCategoryListReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

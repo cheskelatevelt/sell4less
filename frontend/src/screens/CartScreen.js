@@ -5,20 +5,17 @@ import { addToCart, removeFromCart } from "../actions/cartActions";
 import MessageBox from "../components/MessageBox";
 
 export default function CartScreen(props) {
-  const productId = props.match.params.id;
-  const qty = props.location.search
-    ? Number(props.location.search.split("=")[1])
-    : 1;
+  const jobId = props.match.params.id;
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, qty));
+    if (jobId) {
+      dispatch(addToCart(jobId));
     }
-  }, [dispatch, productId, qty]);
+  }, [dispatch, jobId]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
@@ -37,7 +34,7 @@ export default function CartScreen(props) {
         ) : (
           <ul>
             {cartItems.map((item) => (
-              <li key={item.product}>
+              <li key={item.job}>
                 <div className="row">
                   <div>
                     <img
@@ -47,30 +44,14 @@ export default function CartScreen(props) {
                     ></img>
                   </div>
                   <div className="min-30">
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
-                  </div>
-                  <div>
-                    <select
-                      value={item.qty}
-                      onChange={(e) =>
-                        dispatch(
-                          addToCart(item.product, Number(e.target.value))
-                        )
-                      }
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </select>
+                    <Link to={`/job/${item.job}`}>{item.name}</Link>
                   </div>
 
                   <div>${item.price}</div>
                   <div>
                     <button
                       type="button"
-                      onClick={() => removeFromCartHandler(item.product)}
+                      onClick={() => removeFromCartHandler(item.job)}
                     >
                       Delete
                     </button>

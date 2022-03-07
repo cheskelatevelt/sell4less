@@ -1,51 +1,44 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
-import {
-  createProduct,
-  deleteProduct,
-  listProducts,
-} from "../actions/productActions";
+import { createJob, deleteJob, listJobs } from "../actions/jobActions";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import {
-  PRODUCT_CREATE_RESET,
-  PRODUCT_DELETE_RESET,
-} from "../constants/productConstants";
+import { JOB_CREATE_RESET, JOB_DELETE_RESET } from "../constants/jobConstants";
 
-export default function ProductListScreen(props) {
+export default function JobListScreen(props) {
   const sellerMode = props.match.path.indexOf("/seller") >= 0;
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
-  const productCreate = useSelector((state) => state.productCreate);
+  const jobList = useSelector((state) => state.jobList);
+  const { loading, error, jobs } = jobList;
+  const jobCreate = useSelector((state) => state.jobCreate);
   const {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    product: createdProduct,
-  } = productCreate;
+    job: createdJob,
+  } = jobCreate;
 
-  const productDelete = useSelector((state) => state.productDelete);
+  const jobDelete = useSelector((state) => state.jobDelete);
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = productDelete;
+  } = jobDelete;
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
-  const deleteHandler = (product) => {
+  const deleteHandler = (job) => {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this product!",
+      text: "Once deleted, you will not be able to recover this job!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        dispatch(deleteProduct(product._id));
-        swal(`Product ${product.name} has been deleted`, {
+        dispatch(deleteJob(job._id));
+        swal(`Job ${job.name} has been deleted`, {
           icon: "success",
         });
       }
@@ -55,15 +48,15 @@ export default function ProductListScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
-      dispatch({ type: PRODUCT_CREATE_RESET });
-      props.history.push(`/product/${createdProduct._id}/edit`);
+      dispatch({ type: JOB_CREATE_RESET });
+      props.history.push(`/job/${createdJob._id}/edit`);
     }
     if (successDelete) {
-      dispatch({ type: PRODUCT_DELETE_RESET });
+      dispatch({ type: JOB_DELETE_RESET });
     }
-    dispatch(listProducts({ seller: sellerMode ? userInfo._id : "" }));
+    dispatch(listJobs({ seller: sellerMode ? userInfo._id : "" }));
   }, [
-    createdProduct,
+    createdJob,
     dispatch,
     props.history,
     sellerMode,
@@ -73,14 +66,14 @@ export default function ProductListScreen(props) {
   ]);
 
   const createHandler = () => {
-    dispatch(createProduct());
+    dispatch(createJob());
   };
   return (
     <div>
       <div className="row">
-        <h1>Products</h1>
+        <h1>Jobs</h1>
         <button type="button" className="primary" onClick={createHandler}>
-          Create Product
+          Create Job
         </button>
       </div>
 
@@ -105,44 +98,35 @@ export default function ProductListScreen(props) {
               <th>Category</th>
               <th>Brand</th>
               <th>Seller</th>
-
-              <th>Count In Stock</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
+            {jobs.map((job) => (
+              <tr key={job._id}>
+                <td>{job._id}</td>
+                <td>{job.name}</td>
                 <td>
-                  <img
-                    className="small"
-                    src={product.image}
-                    alt={product.name}
-                  ></img>
+                  <img className="small" src={job.image} alt={job.name}></img>
                 </td>
 
-                <td>${product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-                <td>{product.seller.seller.name}</td>
-                <td>{product.countInStock}</td>
+                <td>${job.price}</td>
+                <td>{job.category}</td>
+                <td>{job.brand}</td>
+                <td>{job.seller.seller.name}</td>
 
                 <td>
                   <button
                     type="button"
                     className="small"
-                    onClick={() =>
-                      props.history.push(`/product/${product._id}/edit`)
-                    }
+                    onClick={() => props.history.push(`/job/${job._id}/edit`)}
                   >
                     Edit
                   </button>
                   <button
                     type="button"
                     className="small"
-                    onClick={() => deleteHandler(product)}
+                    onClick={() => deleteHandler(job)}
                   >
                     Delete
                   </button>

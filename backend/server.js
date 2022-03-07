@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routers/userRouter.js";
-import productRouter from "./routers/productRouter.js";
+import jobRouter from "./routers/jobRouter.js";
 import orderRouter from "./routers/orderRouter.js";
 import uploadRouter from "./routers/uploadRouter.js";
 import path from "path";
@@ -12,14 +12,14 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/sell4less", {
+mongoose.connect(process.env.MONGODB_URL || "mongodb://localhost/hireup", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
 app.use("/api/uploads", uploadRouter);
 app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
+app.use("/api/jobs", jobRouter);
 app.use("/api/orders", orderRouter);
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");

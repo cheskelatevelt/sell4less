@@ -20,22 +20,3 @@ export const prices = [
     max: 1000,
   },
 ];
-
-export const ratings = [
-  {
-    name: "4 Stars & Up",
-    rating: 4,
-  },
-  {
-    name: "3 Stars & Up",
-    rating: 3,
-  },
-  {
-    name: "2 Stars & Up",
-    rating: 2,
-  },
-  {
-    name: "1 Star & Up",
-    rating: 1,
-  },
-];
